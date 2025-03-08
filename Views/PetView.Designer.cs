@@ -29,14 +29,15 @@
         private void InitializeComponent()
         {
             tabControl1 = new TabControl();
-            tabPage1 = new TabPage();
+            tabPagePetList = new TabPage();
+            btnClose = new Button();
             btnDelete = new Button();
             btnEdit = new Button();
             btnAdd = new Button();
             btnSearch = new Button();
             txtSearch = new TextBox();
             dataGridView = new DataGridView();
-            tabPage2 = new TabPage();
+            tabPagePetDetail = new TabPage();
             label4 = new Label();
             label3 = new Label();
             label2 = new Label();
@@ -48,15 +49,15 @@
             txtPetType = new TextBox();
             txtPetId = new TextBox();
             tabControl1.SuspendLayout();
-            tabPage1.SuspendLayout();
+            tabPagePetList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
-            tabPage2.SuspendLayout();
+            tabPagePetDetail.SuspendLayout();
             SuspendLayout();
             // 
             // tabControl1
             // 
-            tabControl1.Controls.Add(tabPage1);
-            tabControl1.Controls.Add(tabPage2);
+            tabControl1.Controls.Add(tabPagePetList);
+            tabControl1.Controls.Add(tabPagePetDetail);
             tabControl1.Dock = DockStyle.Fill;
             tabControl1.Location = new Point(0, 0);
             tabControl1.Name = "tabControl1";
@@ -64,24 +65,36 @@
             tabControl1.Size = new Size(800, 450);
             tabControl1.TabIndex = 0;
             // 
-            // tabPage1
+            // tabPagePetList
             // 
-            tabPage1.Controls.Add(btnDelete);
-            tabPage1.Controls.Add(btnEdit);
-            tabPage1.Controls.Add(btnAdd);
-            tabPage1.Controls.Add(btnSearch);
-            tabPage1.Controls.Add(txtSearch);
-            tabPage1.Controls.Add(dataGridView);
-            tabPage1.Location = new Point(4, 24);
-            tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(792, 422);
-            tabPage1.TabIndex = 0;
-            tabPage1.Text = "Pet List";
-            tabPage1.UseVisualStyleBackColor = true;
+            tabPagePetList.Controls.Add(btnClose);
+            tabPagePetList.Controls.Add(btnDelete);
+            tabPagePetList.Controls.Add(btnEdit);
+            tabPagePetList.Controls.Add(btnAdd);
+            tabPagePetList.Controls.Add(btnSearch);
+            tabPagePetList.Controls.Add(txtSearch);
+            tabPagePetList.Controls.Add(dataGridView);
+            tabPagePetList.Location = new Point(4, 24);
+            tabPagePetList.Name = "tabPagePetList";
+            tabPagePetList.Padding = new Padding(3);
+            tabPagePetList.Size = new Size(792, 422);
+            tabPagePetList.TabIndex = 0;
+            tabPagePetList.Text = "Pet List";
+            tabPagePetList.UseVisualStyleBackColor = true;
+            // 
+            // btnClose
+            // 
+            btnClose.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnClose.Location = new Point(630, 3);
+            btnClose.Name = "btnClose";
+            btnClose.Size = new Size(39, 23);
+            btnClose.TabIndex = 3;
+            btnClose.Text = "X";
+            btnClose.UseVisualStyleBackColor = true;
             // 
             // btnDelete
             // 
+            btnDelete.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnDelete.Location = new Point(594, 92);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(75, 23);
@@ -91,6 +104,7 @@
             // 
             // btnEdit
             // 
+            btnEdit.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnEdit.Location = new Point(594, 63);
             btnEdit.Name = "btnEdit";
             btnEdit.Size = new Size(75, 23);
@@ -100,6 +114,7 @@
             // 
             // btnAdd
             // 
+            btnAdd.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnAdd.Location = new Point(594, 34);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(75, 23);
@@ -109,15 +124,18 @@
             // 
             // btnSearch
             // 
+            btnSearch.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnSearch.Location = new Point(513, 5);
             btnSearch.Name = "btnSearch";
             btnSearch.Size = new Size(75, 23);
             btnSearch.TabIndex = 2;
             btnSearch.Text = "Search";
             btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
             // 
             // txtSearch
             // 
+            txtSearch.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             txtSearch.Location = new Point(6, 5);
             txtSearch.Name = "txtSearch";
             txtSearch.Size = new Size(501, 23);
@@ -125,31 +143,32 @@
             // 
             // dataGridView
             // 
+            dataGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView.Location = new Point(6, 34);
             dataGridView.Name = "dataGridView";
             dataGridView.Size = new Size(582, 380);
             dataGridView.TabIndex = 0;
             // 
-            // tabPage2
+            // tabPagePetDetail
             // 
-            tabPage2.Controls.Add(label4);
-            tabPage2.Controls.Add(label3);
-            tabPage2.Controls.Add(label2);
-            tabPage2.Controls.Add(label1);
-            tabPage2.Controls.Add(btnCancel);
-            tabPage2.Controls.Add(btnSave);
-            tabPage2.Controls.Add(txtPetName);
-            tabPage2.Controls.Add(txtPetColor);
-            tabPage2.Controls.Add(txtPetType);
-            tabPage2.Controls.Add(txtPetId);
-            tabPage2.Location = new Point(4, 24);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(792, 422);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "Pet Detail";
-            tabPage2.UseVisualStyleBackColor = true;
+            tabPagePetDetail.Controls.Add(label4);
+            tabPagePetDetail.Controls.Add(label3);
+            tabPagePetDetail.Controls.Add(label2);
+            tabPagePetDetail.Controls.Add(label1);
+            tabPagePetDetail.Controls.Add(btnCancel);
+            tabPagePetDetail.Controls.Add(btnSave);
+            tabPagePetDetail.Controls.Add(txtPetName);
+            tabPagePetDetail.Controls.Add(txtPetColor);
+            tabPagePetDetail.Controls.Add(txtPetType);
+            tabPagePetDetail.Controls.Add(txtPetId);
+            tabPagePetDetail.Location = new Point(4, 24);
+            tabPagePetDetail.Name = "tabPagePetDetail";
+            tabPagePetDetail.Padding = new Padding(3);
+            tabPagePetDetail.Size = new Size(792, 422);
+            tabPagePetDetail.TabIndex = 1;
+            tabPagePetDetail.Text = "Pet Detail";
+            tabPagePetDetail.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
@@ -195,6 +214,7 @@
             btnCancel.TabIndex = 1;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
+            
             // 
             // btnSave
             // 
@@ -242,19 +262,19 @@
             Name = "PetView";
             Text = "PetView";
             tabControl1.ResumeLayout(false);
-            tabPage1.ResumeLayout(false);
-            tabPage1.PerformLayout();
+            tabPagePetList.ResumeLayout(false);
+            tabPagePetList.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
-            tabPage2.ResumeLayout(false);
-            tabPage2.PerformLayout();
+            tabPagePetDetail.ResumeLayout(false);
+            tabPagePetDetail.PerformLayout();
             ResumeLayout(false);
         }
 
         #endregion
 
         private TabControl tabControl1;
-        private TabPage tabPage1;
-        private TabPage tabPage2;
+        private TabPage tabPagePetList;
+        private TabPage tabPagePetDetail;
         private Button btnDelete;
         private Button btnEdit;
         private Button btnAdd;
@@ -271,5 +291,6 @@
         private TextBox txtPetColor;
         private TextBox txtPetType;
         private TextBox txtPetId;
+        private Button btnClose;
     }
 }

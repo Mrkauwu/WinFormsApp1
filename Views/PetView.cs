@@ -22,6 +22,13 @@ namespace WinFormsApp1.Views
         {
             InitializeComponent();
             AssociateAndRaiseViewEvents();
+            tabControl1.TabPages.Remove(tabPagePetDetail);
+            btnClose.Click += delegate { this.Close(); };
+        }
+
+        private void BtnClose_Click(object? sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void AssociateAndRaiseViewEvents()
@@ -32,7 +39,46 @@ namespace WinFormsApp1.Views
                 if (e.KeyCode == Keys.Enter)
                     SearchEvent?.Invoke(this, EventArgs.Empty);
             };
-            //Others
+            btnAdd.Click += delegate
+            {
+                AddNewEvent?.Invoke(this, EventArgs.Empty);
+                tabControl1.TabPages.Remove(tabPagePetList);
+                tabControl1.TabPages.Add(tabPagePetDetail);
+                tabPagePetDetail.Text = "Add new pet";
+            };
+            btnEdit.Click += delegate
+            {
+                EditEvent?.Invoke(this, EventArgs.Empty);
+                tabControl1.TabPages.Remove(tabPagePetList);
+                tabControl1.TabPages.Add(tabPagePetDetail);
+                tabPagePetDetail.Text = "Edit pet";
+            };
+            btnSave.Click += delegate
+            {
+                SaveEvent?.Invoke(this, EventArgs.Empty);
+                if (isSuccessful)
+                {
+                    tabControl1.TabPages.Remove(tabPagePetDetail);
+                    tabControl1.TabPages.Add(tabPagePetList);
+                }
+                MessageBox.Show(Message);
+            };
+            btnDelete.Click += delegate
+            {
+                var result = MessageBox.Show("Are you sure you want to delete the selected pet?", "Warning",
+                         MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
+                {
+                    DeleteEvent?.Invoke(this, EventArgs.Empty);
+                    MessageBox.Show(Message);
+                }
+            };
+            btnCancel.Click += delegate
+            {
+                CancelEvent?.Invoke(this, EventArgs.Empty);
+                tabControl1.TabPages.Remove(tabPagePetDetail);
+                tabControl1.TabPages.Add(tabPagePetList);
+            };
         }
 
         //Properties
@@ -97,5 +143,32 @@ namespace WinFormsApp1.Views
         {
             dataGridView.DataSource = petList;
         }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private static PetView instance;
+        public static PetView GetInstance(Form parentContainer)
+        {
+            if (instance == null || instance.IsDisposed)
+            {
+                instance = new PetView();
+                instance.MdiParent = parentContainer;
+                instance.FormBorderStyle = FormBorderStyle.None;
+                instance.Dock = DockStyle.Fill;
+            }
+            else
+            {
+                if (instance.WindowState == FormWindowState.Minimized)
+                    instance.WindowState = FormWindowState.Normal;
+
+                instance.BringToFront();
+            }
+            return instance;
+        }
+
+        
     }
 }
